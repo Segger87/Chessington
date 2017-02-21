@@ -14,7 +14,7 @@ namespace Chessington.GameEngine.Pieces
             var legalMoves = new List<Square>();
             switch (Player)
             {
-                case Player.Red:
+                case Player.Black:
                 {
                     var positionInfront = new Square(myLocation.Row + 1, myLocation.Col);
                     if (board.GetPiece(positionInfront) == null)

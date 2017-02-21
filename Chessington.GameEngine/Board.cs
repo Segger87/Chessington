@@ -61,7 +61,7 @@ namespace Chessington.GameEngine
             board[to.Row, to.Col] = board[from.Row, from.Col];
             board[from.Row, from.Col] = null;
 
-            CurrentPlayer = movingPiece.Player == Player.White ? Player.Red : Player.White;
+            CurrentPlayer = movingPiece.Player == Player.White ? Player.Black : Player.White;
             OnCurrentPlayerChanged(CurrentPlayer);
         }
         
