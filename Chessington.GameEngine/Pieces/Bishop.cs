@@ -10,7 +10,38 @@ namespace Chessington.GameEngine.Pieces
 
         public override IEnumerable<Square> GetAvailableMoves(Board board)
         {
-            return Enumerable.Empty<Square>();
+            var myLocation = board.FindPiece(this);
+            var legalMoves = new List<Square>();
+            
+
+            for (var i = 0; i < 8; i++)
+            {
+                var placesBishopCanMoveTo = new Square(myLocation.Row + i, myLocation.Col + i);
+                if (placesBishopCanMoveTo != myLocation && placesBishopCanMoveTo.Row < 8 && placesBishopCanMoveTo.Col < 8)
+                {
+                    legalMoves.Add(placesBishopCanMoveTo);
+                }       
+                placesBishopCanMoveTo = new Square(myLocation.Row - i, myLocation.Col - i);
+                if (placesBishopCanMoveTo != myLocation && placesBishopCanMoveTo.Row > -1 &&
+                    placesBishopCanMoveTo.Col > -1)
+                {
+                    legalMoves.Add(placesBishopCanMoveTo);
+                }
+                placesBishopCanMoveTo = new Square(myLocation.Row + i, myLocation.Col - i);
+                if (placesBishopCanMoveTo != myLocation && placesBishopCanMoveTo.Row < 8 &&
+                    placesBishopCanMoveTo.Col > -1)
+                {
+                    legalMoves.Add(placesBishopCanMoveTo);
+                }
+                placesBishopCanMoveTo = new Square(myLocation.Row - i, myLocation.Col + i);
+                if (placesBishopCanMoveTo != myLocation && placesBishopCanMoveTo.Row > -1 &&
+                    placesBishopCanMoveTo.Col < 8)
+                {
+                    legalMoves.Add(placesBishopCanMoveTo);
+                }
+            }
+
+            return legalMoves;
         }
     }
 }

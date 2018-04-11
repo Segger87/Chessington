@@ -21,6 +21,7 @@ namespace Chessington.GameEngine.Pieces
                 {
                     legalMoves.Add(placesRookCanMoveTo);
                 }
+
                 placesRookCanMoveTo = new Square(myLocation.Row, i);
                 if (placesRookCanMoveTo != myLocation)
                 {
