@@ -12,18 +12,18 @@ namespace Chessington.UI.Factories
         {
             for (var i = 0; i < GameSettings.BoardSize; i++)
             {
-                board.AddPiece(Square.At(1, i), new Pawn(Player.Black));
+                board.AddPiece(Square.At(1, i), new Pawn(Player.Red));
                 board.AddPiece(Square.At(6, i), new Pawn(Player.White));
             }
 
-            board.AddPiece(Square.At(0, 0), new Rook(Player.Black));
-            board.AddPiece(Square.At(0, 1), new Knight(Player.Black));
-            board.AddPiece(Square.At(0, 2), new Bishop(Player.Black));
-            board.AddPiece(Square.At(0, 3), new Queen(Player.Black));
-            board.AddPiece(Square.At(0, 4), new King(Player.Black));
-            board.AddPiece(Square.At(0, 5), new Bishop(Player.Black));
-            board.AddPiece(Square.At(0, 6), new Knight(Player.Black));
-            board.AddPiece(Square.At(0, 7), new Rook(Player.Black));
+            board.AddPiece(Square.At(0, 0), new Rook(Player.Red));
+            board.AddPiece(Square.At(0, 1), new Knight(Player.Red));
+            board.AddPiece(Square.At(0, 2), new Bishop(Player.Red));
+            board.AddPiece(Square.At(0, 3), new Queen(Player.Red));
+            board.AddPiece(Square.At(0, 4), new King(Player.Red));
+            board.AddPiece(Square.At(0, 5), new Bishop(Player.Red));
+            board.AddPiece(Square.At(0, 6), new Knight(Player.Red));
+            board.AddPiece(Square.At(0, 7), new Rook(Player.Red));
 
             board.AddPiece(Square.At(7, 0), new Rook(Player.White));
             board.AddPiece(Square.At(7, 1), new Knight(Player.White));
