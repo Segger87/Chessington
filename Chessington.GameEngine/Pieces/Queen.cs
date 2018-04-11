@@ -10,7 +10,48 @@ namespace Chessington.GameEngine.Pieces
 
         public override IEnumerable<Square> GetAvailableMoves(Board board)
         {
-            return Enumerable.Empty<Square>();
+            var myLocation = board.FindPiece(this);
+            var legalMoves = new List<Square>();
+
+            for (var i = 0; i < 8; i++)
+            {
+                var placesQueenCanMove = new Square(myLocation.Row + i, myLocation.Col + i);
+
+                if (placesQueenCanMove != myLocation && placesQueenCanMove.Row < 8 && placesQueenCanMove.Col < 8)
+                {
+                    legalMoves.Add(placesQueenCanMove);    
+                }
+                placesQueenCanMove = new Square(myLocation.Row - i, myLocation.Col - i);
+                if (placesQueenCanMove != myLocation && placesQueenCanMove.Row > -1 &&
+                    placesQueenCanMove.Col > -1)
+                {
+                    legalMoves.Add(placesQueenCanMove);
+                }
+                placesQueenCanMove = new Square(myLocation.Row + i, myLocation.Col - i);
+                if (placesQueenCanMove != myLocation && placesQueenCanMove.Row < 8 &&
+                    placesQueenCanMove.Col > -1)
+                {
+                    legalMoves.Add(placesQueenCanMove);
+                }
+                placesQueenCanMove = new Square(myLocation.Row - i, myLocation.Col + i);
+                if (placesQueenCanMove != myLocation && placesQueenCanMove.Row > -1 &&
+                    placesQueenCanMove.Col < 8)
+                {
+                    legalMoves.Add(placesQueenCanMove);
+                }
+                placesQueenCanMove = new Square(i, myLocation.Col);
+                if (placesQueenCanMove != myLocation)
+                {
+                    legalMoves.Add(placesQueenCanMove);
+                }
+                placesQueenCanMove = new Square(myLocation.Row, i);
+                if (placesQueenCanMove != myLocation)
+                {
+                    legalMoves.Add(placesQueenCanMove);
+                }
+            }
+
+            return legalMoves;
         }
     }
 }
