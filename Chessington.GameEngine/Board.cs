@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using Chessington.GameEngine.Pieces;
 
 namespace Chessington.GameEngine
@@ -83,6 +84,11 @@ namespace Chessington.GameEngine
         {
             var handler = CurrentPlayerChanged;
             if (handler != null) handler(player);
+        }
+
+        public bool isSquareOccupied(Square position)
+        {
+            return GetPiece(position) != null;
         }
     }
 }
