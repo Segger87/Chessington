@@ -11,40 +11,40 @@ namespace Chessington.GameEngine.Pieces
         {
             var legalMoves = new List<Square>();
 
-            for (var i = 0; i < GameSettings.BoardSize; i++)
+            for (var i = 1; i < GameSettings.BoardSize; i++)
             {
                 var south = new Square(MyLocation(board).Row + i, MyLocation(board).Col);
-                if (board.OnBoard(south) && board.isSquareOccupied(south))
+                if (!board.OnBoard(south) || board.isSquareOccupied(south))
                 {
                     break;
                 }
                 legalMoves = OnlyMoveIfPossible(board, legalMoves, south);
             }
 
-            for (var i = 0; i < GameSettings.BoardSize; i++)
+            for (var i = 1; i < GameSettings.BoardSize; i++)
             {
                 var east = new Square(MyLocation(board).Row, MyLocation(board).Col + i);
-                if (board.OnBoard(east) && board.isSquareOccupied(east))
+                if (!board.OnBoard(east) || board.isSquareOccupied(east))
                 {
                     break;
                 }
                 legalMoves = OnlyMoveIfPossible(board, legalMoves, east);
             }
 
-            for (var i = 0; i < GameSettings.BoardSize; i++)
+            for (var i = 1; i < GameSettings.BoardSize; i++)
             {
                 var north = new Square(MyLocation(board).Row - i, MyLocation(board).Col);
-                if(board.OnBoard(north) && board.isSquareOccupied(north))
+                if(!board.OnBoard(north) || board.isSquareOccupied(north))
                 {
                     break;
                 }
                 legalMoves = OnlyMoveIfPossible(board, legalMoves, north);
             }
 
-            for (var i = 0; i < GameSettings.BoardSize; i++)
+            for (var i = 1; i < GameSettings.BoardSize; i++)
             {
                 var west = new Square(MyLocation(board).Row, MyLocation(board).Col - i);
-                if (board.OnBoard(west) && board.isSquareOccupied(west))
+                if (!board.OnBoard(west) || board.isSquareOccupied(west))
                 {
                     break;
                 }
@@ -55,7 +55,7 @@ namespace Chessington.GameEngine.Pieces
         }
         private List<Square> OnlyMoveIfPossible(Board board, List<Square> moves, Square move)
         {
-            if (board.isSquareOccupied(move) || move == MyLocation(board))
+            if (board.isSquareOccupied(move))
             {
                 return moves;
             }
