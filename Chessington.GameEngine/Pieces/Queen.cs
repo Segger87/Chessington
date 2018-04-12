@@ -5,62 +5,24 @@ namespace Chessington.GameEngine.Pieces
 {
     public class Queen : Piece
     {
+
+        private static readonly Dictionary<string, List<int>> directions = new Dictionary<string, List<int>>
+        {
+            { "north", new List<int>{-1, 0}},
+            { "east", new List<int>{0, 1}},
+            { "west", new List<int>{0, -1}},
+            { "south", new List<int>{1, 0}},
+            { "northWest", new List<int>{-1, -1}},
+            { "northEast", new List<int>{-1, 1}},
+            { "southWest", new List<int>{1, -1}},
+            { "southEast", new List<int>{1, 1}}
+        };
         public Queen(Player player)
             : base(player) { }
 
         public override IEnumerable<Square> GetAvailableMoves(Board board)
         {
-            var myLocation = board.FindPiece(this);
-            var legalMoves = new List<Square>();
-
-            for (var i = 0; i < 8; i++)
-            {
-                var placeCanMove = new Square(myLocation.Row + i, myLocation.Col + i);
-                var onBoard = board.OnBoard(placeCanMove);
-
-                if (placeCanMove != myLocation && onBoard)
-                {
-                    legalMoves.Add(placeCanMove);
-                }
-
-                placeCanMove = new Square(myLocation.Row - i, myLocation.Col - i);
-                onBoard = board.OnBoard(placeCanMove);
-
-                if (placeCanMove != myLocation && onBoard)
-                {
-                    legalMoves.Add(placeCanMove);
-                }
-
-                placeCanMove = new Square(myLocation.Row + i, myLocation.Col - i);
-                onBoard = board.OnBoard(placeCanMove);
-
-                if (placeCanMove != myLocation && onBoard)
-                {
-                    legalMoves.Add(placeCanMove);
-                }
-
-                placeCanMove = new Square(myLocation.Row - i, myLocation.Col + i);
-                onBoard = board.OnBoard(placeCanMove);
-
-                if (placeCanMove != myLocation && onBoard)
-                {
-                    legalMoves.Add(placeCanMove);
-                }
-
-                placeCanMove = new Square(i, myLocation.Col);
-                if (placeCanMove != myLocation)
-                {
-                    legalMoves.Add(placeCanMove);
-                }
-
-                placeCanMove = new Square(myLocation.Row, i);
-                if (placeCanMove != myLocation)
-                {
-                    legalMoves.Add(placeCanMove);
-                }
-            }
-
-            return legalMoves;
+            return Steps(board, directions);
         }
     }
 }
