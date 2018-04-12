@@ -17,25 +17,30 @@ namespace Chessington.GameEngine.Pieces
             for (var i = 0; i < 8; i++)
             {
                 var placesBishopCanMoveTo = new Square(myLocation.Row + i, myLocation.Col + i);
-                if (placesBishopCanMoveTo != myLocation && placesBishopCanMoveTo.Row < 8 && placesBishopCanMoveTo.Col < 8)
+                var withinBoardBoundarys = board.OnBoard(placesBishopCanMoveTo);
+
+                if (placesBishopCanMoveTo != myLocation && withinBoardBoundarys)
                 {
                     legalMoves.Add(placesBishopCanMoveTo);
                 }       
                 placesBishopCanMoveTo = new Square(myLocation.Row - i, myLocation.Col - i);
-                if (placesBishopCanMoveTo != myLocation && placesBishopCanMoveTo.Row > -1 &&
-                    placesBishopCanMoveTo.Col > -1)
+                withinBoardBoundarys = board.OnBoard(placesBishopCanMoveTo);
+
+                if (placesBishopCanMoveTo != myLocation && withinBoardBoundarys)
                 {
                     legalMoves.Add(placesBishopCanMoveTo);
                 }
                 placesBishopCanMoveTo = new Square(myLocation.Row + i, myLocation.Col - i);
-                if (placesBishopCanMoveTo != myLocation && placesBishopCanMoveTo.Row < 8 &&
-                    placesBishopCanMoveTo.Col > -1)
+                withinBoardBoundarys = board.OnBoard(placesBishopCanMoveTo);
+
+                if (placesBishopCanMoveTo != myLocation && withinBoardBoundarys)
                 {
                     legalMoves.Add(placesBishopCanMoveTo);
                 }
                 placesBishopCanMoveTo = new Square(myLocation.Row - i, myLocation.Col + i);
-                if (placesBishopCanMoveTo != myLocation && placesBishopCanMoveTo.Row > -1 &&
-                    placesBishopCanMoveTo.Col < 8)
+                withinBoardBoundarys = board.OnBoard(placesBishopCanMoveTo);
+
+                if (placesBishopCanMoveTo != myLocation && withinBoardBoundarys)
                 {
                     legalMoves.Add(placesBishopCanMoveTo);
                 }

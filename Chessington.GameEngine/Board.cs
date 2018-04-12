@@ -22,6 +22,15 @@ namespace Chessington.GameEngine
             CapturedPieces = new List<Piece>();
         }
 
+        public bool OnBoard(Square square)
+        {
+            return square.Row < GameSettings.BoardSize &&
+                   square.Col < GameSettings.BoardSize &&
+                   square.Row > -1 &&
+                   square.Col > -1;
+        }
+
+
         public void AddPiece(Square square, Piece pawn)
         {
             board[square.Row, square.Col] = pawn;

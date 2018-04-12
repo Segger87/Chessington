@@ -12,6 +12,11 @@ namespace Chessington.GameEngine.Pieces
             Player = player;
         }
 
+        public Square MyLocation(Board board)
+        {
+            return board.FindPiece(this);
+        }
+
         public Player Player { get; private set; }
 
         public abstract IEnumerable<Square> GetAvailableMoves(Board board);

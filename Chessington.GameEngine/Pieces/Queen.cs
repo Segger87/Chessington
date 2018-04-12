@@ -15,54 +15,48 @@ namespace Chessington.GameEngine.Pieces
 
             for (var i = 0; i < 8; i++)
             {
-                //var placesQueenCanMove = new Square(myLocation.Row + i, myLocation.Col + i);
-                //var placesQueenCanMoveDiagDown = new Square(myLocation.Row - i, myLocation.Col - i);
-                //var placesQueenCanMoveDiagUp1 = new Square(myLocation.Row - i, myLocation.Col + i);
-                //var placesQueenCanMoveDiagUp2 = new Square(myLocation.Row + i, myLocation.Col - i);
-                //var placesQueenCanMoveRow = new Square(i, myLocation.Col);
-                //var placesQueenCanMoveCol = new Square(myLocation.Row, i);
+                var placeCanMove = new Square(myLocation.Row + i, myLocation.Col + i);
+                var onBoard = board.OnBoard(placeCanMove);
 
-                //if (placesQueenCanMove != myLocation)
-                //{
-                //    legalMoves.Add(placesQueenCanMove);
-                //    legalMoves.Add(placesQueenCanMoveDiagDown);
-                //    legalMoves.Add(placesQueenCanMoveDiagUp1);
-                //    legalMoves.Add(placesQueenCanMoveDiagUp2);
-                //    legalMoves.Add(placesQueenCanMoveRow);
-                //    legalMoves.Add(placesQueenCanMoveCol);
-                //}     
-                var placesQueenCanMove = new Square(myLocation.Row + i, myLocation.Col + i);
-                if (placesQueenCanMove != myLocation && placesQueenCanMove.Row < 8 && placesQueenCanMove.Col < 8)
+                if (placeCanMove != myLocation && onBoard)
                 {
-                    legalMoves.Add(placesQueenCanMove);
+                    legalMoves.Add(placeCanMove);
                 }
-                placesQueenCanMove = new Square(myLocation.Row - i, myLocation.Col - i);
-                if (placesQueenCanMove != myLocation && placesQueenCanMove.Row > -1 &&
-                    placesQueenCanMove.Col > -1)
+
+                placeCanMove = new Square(myLocation.Row - i, myLocation.Col - i);
+                onBoard = board.OnBoard(placeCanMove);
+
+                if (placeCanMove != myLocation && onBoard)
                 {
-                    legalMoves.Add(placesQueenCanMove);
+                    legalMoves.Add(placeCanMove);
                 }
-                placesQueenCanMove = new Square(myLocation.Row + i, myLocation.Col - i);
-                if (placesQueenCanMove != myLocation && placesQueenCanMove.Row < 8 &&
-                    placesQueenCanMove.Col > -1)
+
+                placeCanMove = new Square(myLocation.Row + i, myLocation.Col - i);
+                onBoard = board.OnBoard(placeCanMove);
+
+                if (placeCanMove != myLocation && onBoard)
                 {
-                    legalMoves.Add(placesQueenCanMove);
+                    legalMoves.Add(placeCanMove);
                 }
-                placesQueenCanMove = new Square(myLocation.Row - i, myLocation.Col + i);
-                if (placesQueenCanMove != myLocation && placesQueenCanMove.Row > -1 &&
-                    placesQueenCanMove.Col < 8)
+
+                placeCanMove = new Square(myLocation.Row - i, myLocation.Col + i);
+                onBoard = board.OnBoard(placeCanMove);
+
+                if (placeCanMove != myLocation && onBoard)
                 {
-                    legalMoves.Add(placesQueenCanMove);
+                    legalMoves.Add(placeCanMove);
                 }
-                placesQueenCanMove = new Square(i, myLocation.Col);
-                if (placesQueenCanMove != myLocation)
+
+                placeCanMove = new Square(i, myLocation.Col);
+                if (placeCanMove != myLocation)
                 {
-                    legalMoves.Add(placesQueenCanMove);
+                    legalMoves.Add(placeCanMove);
                 }
-                placesQueenCanMove = new Square(myLocation.Row, i);
-                if (placesQueenCanMove != myLocation)
+
+                placeCanMove = new Square(myLocation.Row, i);
+                if (placeCanMove != myLocation)
                 {
-                    legalMoves.Add(placesQueenCanMove);
+                    legalMoves.Add(placeCanMove);
                 }
             }
 
