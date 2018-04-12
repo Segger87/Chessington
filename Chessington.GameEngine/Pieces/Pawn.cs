@@ -37,10 +37,11 @@ namespace Chessington.GameEngine.Pieces
             var oneStep = new Square(myLocation.Row + direction, myLocation.Col);
             var twoStep = new Square(myLocation.Row + 2 * direction, myLocation.Col);
             legalMoves = onlyMoveIfPossible(board, legalMoves, oneStep);
-            if (firstMove)
+            if (firstMove && board.GetPiece(oneStep) == null)
             {
                 legalMoves = onlyMoveIfPossible(board, legalMoves, twoStep);
             }
+
 
             //switch (Player)
             //{
