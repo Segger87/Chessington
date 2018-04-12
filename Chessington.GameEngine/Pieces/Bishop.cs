@@ -12,41 +12,66 @@ namespace Chessington.GameEngine.Pieces
         {
             var myLocation = board.FindPiece(this);
             var legalMoves = new List<Square>();
-            
 
-            for (var i = 0; i < 8; i++)
+            for (var i = 1; i < GameSettings.BoardSize; i++)
             {
-                var placesBishopCanMoveTo = new Square(myLocation.Row + i, myLocation.Col + i);
-                var withinBoardBoundarys = board.OnBoard(placesBishopCanMoveTo);
-
-                if (placesBishopCanMoveTo != myLocation && withinBoardBoundarys)
+                var placeBishopCanMoveTo = new Square(myLocation.Row + i, myLocation.Col + i);
+                if (!board.OnBoard(placeBishopCanMoveTo) || board.isSquareOccupied(placeBishopCanMoveTo))
                 {
-                    legalMoves.Add(placesBishopCanMoveTo);
-                }       
-                placesBishopCanMoveTo = new Square(myLocation.Row - i, myLocation.Col - i);
-                withinBoardBoundarys = board.OnBoard(placesBishopCanMoveTo);
-
-                if (placesBishopCanMoveTo != myLocation && withinBoardBoundarys)
-                {
-                    legalMoves.Add(placesBishopCanMoveTo);
+                    break;
                 }
-                placesBishopCanMoveTo = new Square(myLocation.Row + i, myLocation.Col - i);
-                withinBoardBoundarys = board.OnBoard(placesBishopCanMoveTo);
 
-                if (placesBishopCanMoveTo != myLocation && withinBoardBoundarys)
-                {
-                    legalMoves.Add(placesBishopCanMoveTo);
-                }
-                placesBishopCanMoveTo = new Square(myLocation.Row - i, myLocation.Col + i);
-                withinBoardBoundarys = board.OnBoard(placesBishopCanMoveTo);
-
-                if (placesBishopCanMoveTo != myLocation && withinBoardBoundarys)
-                {
-                    legalMoves.Add(placesBishopCanMoveTo);
-                }
+                legalMoves = OnlyMoveIfPossible(board, legalMoves, placeBishopCanMoveTo);
             }
 
+            for (var i = 1; i < GameSettings.BoardSize; i++)
+            {
+                var placeBishopCanMoveTo = new Square(myLocation.Row - i, myLocation.Col - i);
+                if (!board.OnBoard(placeBishopCanMoveTo) || board.isSquareOccupied(placeBishopCanMoveTo))
+                {
+                    break;
+                }
+
+                legalMoves = OnlyMoveIfPossible(board, legalMoves, placeBishopCanMoveTo);
+            }
+
+            for (var i = 1; i < GameSettings.BoardSize; i++)
+            {
+                var placeBishopCanMoveTo = new Square(myLocation.Row + i, myLocation.Col - i);
+                if (!board.OnBoard(placeBishopCanMoveTo) || board.isSquareOccupied(placeBishopCanMoveTo))
+                {
+                    break;
+                }
+
+                legalMoves = OnlyMoveIfPossible(board, legalMoves, placeBishopCanMoveTo);
+            }
+
+            for (var i = 1; i < GameSettings.BoardSize; i++)
+            {
+               var placeBishopCanMoveTo = new Square(myLocation.Row - i, myLocation.Col + i);
+                if (!board.OnBoard(placeBishopCanMoveTo) || board.isSquareOccupied(placeBishopCanMoveTo))
+                {
+                    break;
+                }
+
+                legalMoves = OnlyMoveIfPossible(board, legalMoves, placeBishopCanMoveTo);
+            }
+
+
             return legalMoves;
+        }
+
+        private List<Square> OnlyMoveIfPossible(Board board, List<Square> moves, Square move)
+        {
+            if (board.isSquareOccupied(move))
+            {
+                return moves;
+            }
+            else
+            {
+                moves.Add(move);
+                return moves;
+            }
         }
     }
 }
